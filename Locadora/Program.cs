@@ -31,7 +31,7 @@ namespace Locadora
                 switch (resposta)
                 {
                     case 1:
-                        Console.WriteLine("Digite o nome do usuário");
+                        Console.WriteLine("Digite o nome do usuário, por gentileza");
                         string nome = Console.ReadLine();
                         Console.WriteLine("Digite a idade do usuário");
                         int idade = int.Parse(Console.ReadLine());
