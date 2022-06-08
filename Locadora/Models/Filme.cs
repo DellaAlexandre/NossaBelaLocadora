@@ -6,6 +6,7 @@ namespace Locadora.Models
 {
     public class Filme : Item
     {
+     
         public int Duracao { get; set; }
         public int QuantidadeDeOscars { get; set; }
     }

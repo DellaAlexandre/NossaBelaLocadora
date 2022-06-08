@@ -1,4 +1,5 @@
-﻿using Locadora.Models;
+﻿using Locadora.API.Services;
+using Locadora.Models;
 using Locadora.Respository;
 using Locadora.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,8 @@ namespace Locadora.API.Controllers
     [Route("[controller]")]
     public class UsuariosController : ControllerBase
     {
+     
+        private UsuarioServices _usuarioServices = new UsuarioServices();
         
         [HttpGet]
         public List<Usuario> ListarUsuarios()
@@ -26,10 +29,35 @@ namespace Locadora.API.Controllers
         } 
 
         [HttpPost]
-        public void CadastrarUsuario(
+        public ActionResult CadastrarUsuario(
             [FromBody] UsuarioViewModel usuarioRecebido)
         {
+           if (string.IsNullOrEmpty(usuarioRecebido.Nome)){
+                return BadRequest("Nome do usuário não informado");
+            }
+            
+           if(usuarioRecebido.Idade < 18){
+                return BadRequest("Não é permitido o cadastro de pessoas menores de idade");
+            }
+            
+            Usuario objetoRecebido = _usuarioServices.CadastrarUsuario(usuarioRecebido);
+
+            return Created("usuarios", objetoRecebido);
+
 
         }
+
+
+        [HttpGet ("{id}")]
+        public IActionResult OberUsuario(string id)
+        {
+            Usuario usuario = _usuarioServices.Obterusuario(id);
+            if (usuario == null) 
+            { 
+              return NotFound();
+            }
+            return Ok(usuario);
+        }
+
     }
 }
