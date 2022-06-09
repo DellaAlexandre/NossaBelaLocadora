@@ -14,9 +14,9 @@ namespace Locadora.API.Controllers
         private GestaoServices _filmeServices = new GestaoServices();
 
         [HttpPost]
-        public ActionResult CadastroDeFilme([FromBody] FilmeViewModel filmeRecebido)
+        public IActionResult CadastroDeFilme([FromBody] FilmeViewModel filmeRecebido)
         {
-            Item objetoRecebido = _filmeServices.CadastrarFilme(filmeRecebido);
+            Filme objetoRecebido = _filmeServices.CadastrarFilme(filmeRecebido);
             
             return Created("Filme", objetoRecebido);
 
@@ -24,3 +24,7 @@ namespace Locadora.API.Controllers
 
     }
 }
+
+
+
+

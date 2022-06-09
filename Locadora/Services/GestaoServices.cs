@@ -9,27 +9,11 @@ namespace Locadora.Services
 {
     public class GestaoServices
     {
-        private List<Item> _biblioteca = Armazenamento.Biblioteca;
+        private List<Filme> _filme = Armazenamento.Filmes;
+        private List<Serie> _serie = Armazenamento.Series;
         private FilmeViewModel filmeRecebido;
-        public void Cadastrar()
-        {
-            Console.WriteLine("O que deseja cadastrar?");
-            Console.WriteLine("1 - Filme");
-            Console.WriteLine("2 - Série");
-            Console.WriteLine("Qualquer outro número para voltar");
-
-            int respotas = int.Parse(Console.ReadLine());
-            if (respotas == 1)
-            {
-                CadastrarFilme(filmeRecebido);
-            }
-            if (respotas == 2)
-            {
-                CadastrarSerie();
-            }
-        }
-
-        public Item CadastrarFilme(FilmeViewModel filmeRecebido)
+        private SerieViewModel serieRecebido;
+        public Filme CadastrarFilme(FilmeViewModel filmeRecebido)
         {
             Filme filme = new Filme(); 
 
@@ -37,32 +21,39 @@ namespace Locadora.Services
             filme.Quantidade = filmeRecebido.Quantidade;
             filme.Valor = filmeRecebido.Valor;
             filme.Duracao = filmeRecebido.Duracao;
-            filme.Descricao = filmeRecebido.Descricao;
-            filme.Duracao = filmeRecebido.Duracao;
+            filme.Descricao = filmeRecebido.Descricao; 
             filme.QuantidadeDeOscars = filmeRecebido.QuantidadeDeOscars;
 
-        _biblioteca.Add(filme);
+        _filme.Add(filme);
 
             return filme;
         }
 
-        public void CadastrarSerie()
+        public Serie CadastrarSerie(SerieViewModel serieRecebida) 
         {
             Serie serie = new Serie();
 
-            Console.WriteLine("Qual o nome da série que deseja cadastrar?");
-            serie.Titulo = Console.ReadLine();
+            serie.Titulo = serieRecebida.Titulo;
+            serie.Quantidade = serieRecebida.Quantidade;
+            serie.Valor = serieRecebido.Valor;
+            serie.Descricao = serieRecebido.Descricao;
+            serie.Emmies = serieRecebida.Emmies;
+            serie.Temporadas = serieRecebida.Temporadas;
 
-            Console.WriteLine("Quantos cópias desta série existem?");
-            serie.Quantidade = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Qual o valor da locação deste séries?");
-            serie.Valor = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Quantas temporadas tem esta série?");
-            serie.Temporadas = int.Parse(Console.ReadLine());
-
-            _biblioteca.Add(serie);
+            _serie.Add(serie);
+            return serie;
         }
+
+        public List<object> ListarItens()
+        {
+            List<object> lista = new List<object>();
+
+            lista.AddRange(_filme);
+            lista.AddRange(_serie);
+
+            return lista;
+        }
+
+
     }
 }

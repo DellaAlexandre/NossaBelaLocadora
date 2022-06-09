@@ -12,8 +12,7 @@ namespace Locadora.API.Services
         public Usuario CadastrarUsuario(
             UsuarioViewModel usuarioRecebeido)
         {
-            Usuario usuario = 
-                new Usuario(usuarioRecebeido);
+            Usuario usuario = new Usuario(usuarioRecebeido);
             Armazenamento.Usuarios.Add(usuario);
 
             return usuario;

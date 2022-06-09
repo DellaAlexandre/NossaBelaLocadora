@@ -1,5 +1,6 @@
 ﻿using Locadora.Models;
 using Locadora.Respository;
+using Locadora.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -9,17 +10,15 @@ namespace Locadora.API.Controllers
     [ApiController]
     public class BibliotecaController : ControllerBase
     {
-        [HttpGet]
-        public List<Item> ListarItens()
-        {
-            // Armazenamento vai precisar colocar o
-            // using AulasPCDev.Respository;
-            // no inicio do código
-            // Ctrl + . é um atalho para adicionar esse using.
 
-            List<Item> listaitems =
-                Armazenamento.Biblioteca;
-            return listaitems;
+        private GestaoServices _listaitens = new GestaoServices();
+
+        [HttpGet]
+        public IActionResult ListarItens()
+        {
+            List<object> itens = _listaitens.ListarItens();
+           
+            return Ok(itens);
         }
     }
 }
