@@ -3,7 +3,7 @@ using Locadora.Respository;
 using Locadora.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Locadora.Services
 {
@@ -11,8 +11,7 @@ namespace Locadora.Services
     {
         private List<Filme> _filme = Armazenamento.Filmes;
         private List<Serie> _serie = Armazenamento.Series;
-        private FilmeViewModel filmeRecebido;
-        private SerieViewModel serieRecebido;
+
         public Filme CadastrarFilme(FilmeViewModel filmeRecebido)
         {
             Filme filme = new Filme(); 
@@ -35,8 +34,8 @@ namespace Locadora.Services
 
             serie.Titulo = serieRecebida.Titulo;
             serie.Quantidade = serieRecebida.Quantidade;
-            serie.Valor = serieRecebido.Valor;
-            serie.Descricao = serieRecebido.Descricao;
+            serie.Valor = serieRecebida.Valor;
+            serie.Descricao = serieRecebida.Descricao;
             serie.Emmies = serieRecebida.Emmies;
             serie.Temporadas = serieRecebida.Temporadas;
 
@@ -53,7 +52,6 @@ namespace Locadora.Services
 
             return lista;
         }
-
 
     }
 }
